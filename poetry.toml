@@ -1,0 +1,7 @@
+[tool.poetry.virtualenvs]
+path = ".venv"
+create = true
+in-project = true
+
+[tool.poetry.repositories.sandbox]
+url = "https://test.pypi.org/legacy/"

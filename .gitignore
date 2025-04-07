@@ -1,0 +1,52 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# Logs and local databases
+*.log
+*.sqlite3
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS system files
+.DS_Store
+
+# Docker-related
+*.tar
+docker-compose.override.yml
+docker-compose*.log
+.env
+
+# Jenkins-specific
+secrets/
+jenkins_home/
+init.groovy.d/*.groovy
+*.xml
+
+# Python test/output
+htmlcov/
+coverage.xml
+.tox/
+pytest_cache/
+nosetests.xml
+*.cover
+
+# System & backup files
+*.bak
+*.tmp
+*~

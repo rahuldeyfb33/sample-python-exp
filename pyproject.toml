@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "sample-python-exp"
+version = "0.1.0"
+description = "A sample Python project for experimentation"
+authors = ["Your Name <your.email@example.com>"]
+readme = "README.md"
+packages = [{ include = "sample_pkg", from = "src" }]
+
+[tool.poetry.dependencies]
+python = ">=3.8,<3.12"
+
+[tool.poetry.dev-dependencies]
+pytest = "^8.0.2"
+pytest-cov = "^4.1.0"
+
+#[[tool.poetry.source]]
+#name = "pypi"
+#url = "https://pypi.org/simple"
+#priority = "explicit"
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+pythonpath = "src"
+testpaths = "tests"
+junit_family = "xunit1"
+log_cli = true
