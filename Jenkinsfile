@@ -2,38 +2,41 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout SCM') {
+        stage('SCM Checkout: Github') {
             steps {
-                git 'https://github.com/example/sample-python-project.git'
+                git credentialsId: 'github-creds', url: 'https://github.com/rahuldeyfb33/sample-python-exp.git'
+            }
+        }
+
+        stage('Build Python Script') {
+            steps {
+                sh 'pwd'
+                sh 'cd $JENKINS_HOME/workspace/sample-python-pipeline && poetry install && python src/sample_pkg/module_one.py'
             }
         }
 
         stage('Run Tests') {
             steps {
-                sh 'poetry install'
-                sh 'poetry run pytest'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'poetry build'
-            }
-        }
-
-        stage('Publish to PyPI Sandbox') {
-            steps {
-                withCredentials([string(credentialsId: 'pypi-token', variable: 'TWINE_PASSWORD')]) {
-                    sh 'poetry config pypi-token.pypi $TWINE_PASSWORD'
-                    sh 'poetry publish -r sandbox'
-                }
+                sh 'cd $JENKINS_HOME/workspace/sample-python-pipeline && poetry run pytest tests/'
             }
         }
 
         stage('Cleanup') {
             steps {
-                sh 'rm -rf dist build *.egg-info'
+                sh 'rm -rf $JENKINS_HOME/workspace/sample-python-pipeline/*'
             }
+        }
+    }
+
+    post {
+        always {
+            echo 'Post-build action: Cleaning up and notifying...'
+        }
+        success {
+            echo 'The build was successful!'
+        }
+        failure {
+            echo 'The build failed. Check logs for details'
         }
     }
 }
